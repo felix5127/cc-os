@@ -16,13 +16,16 @@ echo ""
 
 # ── 0. 前置检查 ──────────────────────────────────
 
-if ! command -v claude &>/dev/null; then
-  echo "[!] Claude Code CLI 未安装"
-  echo "    请先运行: npm install -g @anthropic-ai/claude-code"
-  exit 1
+if command -v claude &>/dev/null; then
+  echo "[*] Claude Code CLI 已检测到"
+else
+  echo "[!] 未检测到全局 claude 命令"
+  echo "    如果你通过 npx 使用 Claude Code，可以忽略此警告"
+  echo "    全局安装: npm install -g @anthropic-ai/claude-code"
+  echo ""
+  read -rp "    继续安装配置文件？[Y/n]: " cont
+  [[ "$cont" =~ ^[Nn] ]] && echo "已取消。" && exit 0
 fi
-
-echo "[*] Claude Code CLI 已检测到"
 
 # ── 1. 备份已有配置 ──────────────────────────────
 
@@ -84,7 +87,7 @@ echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  配置文件安装完成！"
 echo ""
-echo "  接下来请在 Claude Code 中安装插件："
+echo "  接下来请启动 Claude Code，在对话中逐条输入以下命令安装插件："
 echo ""
 echo "  /install-plugin superpowers@superpowers-marketplace"
 echo "  /install-plugin everything-claude-code@everything-claude-code"
