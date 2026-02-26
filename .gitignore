@@ -1,0 +1,4 @@
+# 运行时文件（不应提交）
+*.jsonl
+*.local.json
+.DS_Store
