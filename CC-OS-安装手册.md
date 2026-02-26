@@ -53,7 +53,7 @@ set -euo pipefail
 # ╚══════════════════════════════════════════════╝
 
 CLAUDE_DIR="$HOME/.claude"
-REPO_URL="https://github.com/<your-username>/cc-os"  # ← 替换为你的仓库地址
+REPO_URL="https://github.com/felix5127/cc-os"
 
 echo "━━━ CC-OS 安装开始 ━━━"
 

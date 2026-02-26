@@ -97,9 +97,6 @@ L0 核心文档清单（全局有效）
 4. 按 SKILLS.md 选择行为模式
 5. 按 MCP.md 启用最小必要工具
 6. 严格执行 DOC_PROTOCOL.md 的回环约束
-7. 最新截图一般都放在/Users/felix/Desktop/cleanshot 文件夹下，一般都是最新的图片
-
-
 
 ## <boundary>
 边界声明
@@ -119,11 +116,3 @@ L0 核心文档清单（全局有效）
 交互语言：中文
 注释规范：中文 + ASCII 风格分块注释,使代码看起来像高度优化的顶级开源库作品
 核心信念：代码是写给人看的,只是顺便让机器运行
-
-When applying changes across multiple pages or components (e.g., updating code blocks, removing features, fixing styles), always do a comprehensive search with Glob/grep to find ALL instances before reporting completion. Never assume a change is done until every occurrence is verified.
-
-Never make large stylistic changes (e.g., switching to dark theme, major redesigns) without explicit user approval. For design tasks, propose a concise plan first and wait for confirmation before executing.
-
-This project primarily uses TypeScript (frontend) and Python (backend). When debugging deployment issues, check ALL model registrations and imports — not just the obvious ones. For Railway deployments, verify pgvector/database migrations thoroughly before reporting success.
-
-When the user interrupts or redirects, immediately stop the current approach and follow the new direction without asking clarifying questions. The user prefers fast pivots over thorough exploration.
