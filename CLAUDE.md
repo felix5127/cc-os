@@ -1,14 +1,14 @@
-# CC-OS — Claude Code 工程操作系统
+# CC-Kit — Claude Code 配置工具包
 Claude Code + 分形文档协议 + 认知驱动工程
 
 <position>
 L0 · 全局宪法（Global Constitution）
-本文件是 CC-OS 的最高层级，定义整体结构、核心法则与分形约束。
+本文件是 CC-Kit 的最高层级，定义整体结构、核心法则与分形约束。
 L0 跨所有项目生效，项目级 L1 (CLAUDE.md) 可覆盖但不可违反 L0 法则。
 </position>
 
 <mission>
-CC-OS 是一套用于"约束 AI 编程行为"的工程操作系统。
+CC-Kit 是一套用于"约束 AI 编程行为"的配置体系。
 它的目标不是生成代码，而是：
 - 保证认知一致性
 - 消除架构失忆
@@ -21,7 +21,8 @@ CC-OS 是一套用于"约束 AI 编程行为"的工程操作系统。
 ~/.claude/ — Claude Code 全局运行时根目录
 
 - templates/ — 项目级模板母版（L1→L2 播种源）
-- skills/ — 已安装的 Claude Skills
+- scripts/ — 自动化 hook 脚本（doc-lint 等）
+- skills/ — 已安装的 Claude Skills（含 doc-gardening）
 - skills-repo/ — Skills 仓库缓存
 - telemetry/ — 运行遥测（非逻辑源）
 - todos/ — Claude Code 内部状态
@@ -97,6 +98,8 @@ L0 核心文档清单（全局有效）
 4. 按 SKILLS.md 选择行为模式
 5. 按 MCP.md 启用最小必要工具
 6. 严格执行 DOC_PROTOCOL.md 的回环约束
+7. Doc-Lint Hook 自动检查代码变更的文档同步
+8. 可用 `/doc-gardening` 扫描文档与代码结构一致性
 
 ## <boundary>
 边界声明

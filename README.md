@@ -1,6 +1,6 @@
-# CC-OS — Claude Code 工程操作系统
+# CC-Kit — Claude Code 配置工具包
 
-> 一套用于约束 AI 编程行为的工程操作系统。
+> 一套用于约束 AI 编程行为的 Claude Code 配置体系。
 >
 > **认知一致性 · 消除架构失忆 · 代码-文档-Agent 三者同构**
 
@@ -8,7 +8,7 @@
 
 ## 这是什么？
 
-CC-OS 是一套 Claude Code 全局配置体系，包含：
+CC-Kit 是一套 Claude Code 全局配置体系，包含：
 
 - **L0 宪法** (`CLAUDE.md`) — 全局行为约束与分形文档协议
 - **Rules** (6 个规则文件) — 编码风格、安全、性能、Git 工作流等具体规范
@@ -20,24 +20,26 @@ CC-OS 是一套 Claude Code 全局配置体系，包含：
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/felix5127/cc-os.git
-cd cc-os
+git clone https://github.com/felix5127/cc-kit.git
+cd cc-kit
 
 # 2. 运行安装脚本
 chmod +x install.sh
 ./install.sh
 ```
 
-或者参考 [CC-OS-安装手册.md](./CC-OS-安装手册.md) 进行手动安装。
+或者参考 [CC-Kit-安装手册.md](./CC-Kit-安装手册.md) 进行手动安装。
 
 ## 仓库结构
 
 ```
-cc-os/
+cc-kit/
 ├── README.md              # 本文件
-├── CC-OS-安装手册.md        # 完整安装手册
+├── CC-Kit-安装手册.md       # 完整安装手册
 ├── install.sh             # 一键安装脚本
 ├── CLAUDE.md              # L0 全局宪法（复制到 ~/.claude/）
+├── DOC_PROTOCOL.md        # 分形文档协议（复制到 ~/.claude/）
+├── PHILOSOPHY.md          # 设计哲学与品味判断（复制到 ~/.claude/）
 ├── settings.json          # 全局设置（复制到 ~/.claude/）
 ├── rules/                 # 规则文件（复制到 ~/.claude/rules/）
 │   ├── agents.md          # Agent 编排策略
@@ -49,7 +51,7 @@ cc-os/
 └── templates/             # 项目模板（复制到 ~/.claude/templates/）
     ├── claude.md          # 项目 L1 宪法模板
     ├── stack.md           # 技术栈模板
-    ├── siklls.md          # Skill 路由模板
+    ├── skills.md          # Skill 路由模板
     ├── mcp.md             # MCP Profile 模板
     └── start.md           # 启动路径模板
 ```

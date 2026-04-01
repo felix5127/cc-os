@@ -2,3 +2,4 @@
 *.jsonl
 *.local.json
 .DS_Store
+__pycache__

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # ╔══════════════════════════════════════════════╗
-# ║  CC-OS Installer — Claude Code 工程操作系统    ║
+# ║  CC-Kit Installer — Claude Code 配置工具包      ║
 # ╚══════════════════════════════════════════════╝
 
 CLAUDE_DIR="$HOME/.claude"
@@ -10,7 +10,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo ""
 echo "  ┌──────────────────────────────────┐"
-echo "  │  CC-OS — Claude Code 工程操作系统  │"
+echo "  │  CC-Kit — Claude Code 配置工具包   │"
 echo "  └──────────────────────────────────┘"
 echo ""
 
@@ -30,7 +30,7 @@ fi
 # ── 1. 备份已有配置 ──────────────────────────────
 
 if [ -f "$CLAUDE_DIR/CLAUDE.md" ] || [ -d "$CLAUDE_DIR/rules" ]; then
-  BACKUP_DIR="$CLAUDE_DIR/backups/cc-os-$(date +%Y%m%d_%H%M%S)"
+  BACKUP_DIR="$CLAUDE_DIR/backups/cc-kit-$(date +%Y%m%d_%H%M%S)"
   mkdir -p "$BACKUP_DIR"
   [ -f "$CLAUDE_DIR/CLAUDE.md" ] && cp "$CLAUDE_DIR/CLAUDE.md" "$BACKUP_DIR/"
   [ -d "$CLAUDE_DIR/rules" ] && cp -r "$CLAUDE_DIR/rules" "$BACKUP_DIR/"
@@ -49,6 +49,12 @@ echo "[*] 目录结构已就绪"
 cp "$SCRIPT_DIR/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
 echo "[+] CLAUDE.md (L0 宪法)"
 
+cp "$SCRIPT_DIR/DOC_PROTOCOL.md" "$CLAUDE_DIR/DOC_PROTOCOL.md"
+echo "[+] DOC_PROTOCOL.md (分形文档协议)"
+
+cp "$SCRIPT_DIR/PHILOSOPHY.md" "$CLAUDE_DIR/PHILOSOPHY.md"
+echo "[+] PHILOSOPHY.md (设计哲学)"
+
 for f in "$SCRIPT_DIR"/rules/*.md; do
   cp "$f" "$CLAUDE_DIR/rules/"
   echo "[+] rules/$(basename "$f")"
@@ -59,12 +65,22 @@ for f in "$SCRIPT_DIR"/templates/*.md; do
   echo "[+] templates/$(basename "$f")"
 done
 
+# ── 3b. 复制脚本文件 ─────────────────────────────
+
+mkdir -p "$CLAUDE_DIR/scripts"
+for f in "$SCRIPT_DIR"/scripts/*; do
+  [ -f "$f" ] || continue
+  cp "$f" "$CLAUDE_DIR/scripts/"
+  chmod +x "$CLAUDE_DIR/scripts/$(basename "$f")"
+  echo "[+] scripts/$(basename "$f")"
+done
+
 # ── 4. 合并 settings.json ────────────────────────
 
 if [ -f "$CLAUDE_DIR/settings.json" ]; then
   echo ""
   echo "[?] 检测到已有 settings.json"
-  echo "    (1) 覆盖（使用 CC-OS 配置）"
+  echo "    (1) 覆盖（使用 CC-Kit 配置）"
   echo "    (2) 跳过（保留现有配置）"
   echo "    (3) 备份后覆盖"
   read -rp "    请选择 [1/2/3]: " choice
@@ -87,21 +103,22 @@ echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  配置文件安装完成！"
 echo ""
-echo "  接下来请启动 Claude Code，在对话中逐条输入以下命令安装插件："
+echo "  接下来请在终端中逐条运行以下命令安装插件："
 echo ""
-echo "  /install-plugin superpowers@superpowers-marketplace"
-echo "  /install-plugin everything-claude-code@everything-claude-code"
-echo "  /install-plugin planning-with-files@planning-with-files"
-echo "  /install-plugin claude-hud@claude-hud"
-echo "  /install-plugin code-simplifier@claude-plugins-official"
-echo "  /install-plugin ralph-wiggum@claude-code-plugins"
+echo "  # 1. 添加第三方 marketplace"
+echo "  claude plugin marketplace add affaan-m/everything-claude-code"
+echo "  claude plugin marketplace add OthmanAdi/planning-with-files"
+echo "  claude plugin marketplace add jarrodwatts/claude-hud"
+echo "  claude plugin marketplace add obra/superpowers-marketplace"
 echo ""
-echo "  如果找不到插件，先添加 marketplace："
-echo "  /add-marketplace everything-claude-code --repo affaan-m/everything-claude-code"
-echo "  /add-marketplace planning-with-files --repo OthmanAdi/planning-with-files"
-echo "  /add-marketplace claude-hud --repo jarrodwatts/claude-hud"
-echo "  /add-marketplace superpowers-marketplace --repo obra/superpowers-marketplace"
+echo "  # 2. 安装插件"
+echo "  claude plugin install superpowers@superpowers-marketplace"
+echo "  claude plugin install everything-claude-code@everything-claude-code"
+echo "  claude plugin install planning-with-files@planning-with-files"
+echo "  claude plugin install claude-hud@claude-hud"
+echo "  claude plugin install code-simplifier@claude-plugins-official"
+echo "  claude plugin install ralph-wiggum@claude-code-plugins"
 echo ""
-echo "  详细说明请参考: CC-OS-安装手册.md"
+echo "  详细说明请参考: CC-Kit-安装手册.md"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""

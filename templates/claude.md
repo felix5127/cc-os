@@ -42,6 +42,14 @@ MCP.md            - Project Specific MCP Tools
 > - {Criterion 2}
 </mission>
 
+<abstract>
+[Auto-generated. Updated by CC-Kit summary-worker.]
+</abstract>
+
+<overview>
+[Auto-generated. Updated by CC-Kit summary-worker.]
+</overview>
+
 # Claude Working Rules
 
 ## Clarification First
