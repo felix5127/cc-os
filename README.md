@@ -1,95 +1,74 @@
-# CC-Kit — Claude Code 配置工具包
+# CC-GEB — Claude Code 配置工具包
 
-> 一套用于约束 AI 编程行为的 Claude Code 配置体系。
+> 让 Claude Code 在任何项目里都更好用。
 >
-> **认知一致性 · 消除架构失忆 · 代码-文档-Agent 三者同构**
+> 闲聊不碍事，小项目轻量，大项目完整。
 
 ---
 
-## 这是什么？
-
-CC-Kit 是一套 Claude Code 全局配置体系，包含：
-
-- **L0 宪法** (`CLAUDE.md`) — 全局行为约束与分形文档协议
-- **Rules** (6 个规则文件) — 编码风格、安全、性能、Git 工作流等具体规范
-- **Templates** (5 个模板) — 新项目播种文件，含 Agent Team Recipes
-- **Settings** — 插件启用、权限配置、Agent Teams 环境变量
-- **48+ Skills** — 通过 6 个插件源自动安装
-
-## 快速开始
+## 安装
 
 ```bash
-# 1. 克隆仓库
-git clone https://github.com/felix5127/cc-kit.git
-cd cc-kit
-
-# 2. 运行安装脚本
-chmod +x install.sh
-./install.sh
+git clone https://github.com/felix5127/cc-geb.git
+cd cc-geb && chmod +x install.sh && ./install.sh
 ```
 
-或者参考 [CC-Kit-安装手册.md](./CC-Kit-安装手册.md) 进行手动安装。
+## 使用
+
+```bash
+cd your-project && claude
+```
+
+然后：
+
+```
+/cc-geb              自动检测项目状态，推荐下一步
+/cc-geb init         初始化项目配置（轻量/标准/完整）
+/cc-geb check        文档与代码一致性巡检
+/cc-geb upgrade      升级配置级别
+```
+
+或者直接说"帮我初始化项目"、"检查一下文档"。
+
+## 三档配置
+
+| 级别 | 生成内容 | 适用场景 |
+|------|---------|---------|
+| **轻量** | CLAUDE.md（项目描述） | 开源项目、小脚本、快速修 bug |
+| **标准** | + STACK.md + GEB 文档同步 | 中型项目、持续迭代 |
+| **完整** | + workflow/ 六层 + 回写闭环 | 大型产品、长期维护 |
+
+**已有 CLAUDE.md？** 不动它。只问你要不要补充 STACK.md 或 workflow/。
+
+## 设计原则
+
+- **全局极简**：只有语言偏好 + 编码风格，闲聊无感知
+- **项目按需**：`/cc-geb init` 交互式生成，不强制
+- **只做加法**：从不修改已有的 CLAUDE.md
+- **渐进采用**：轻量起步，随时 `/cc-geb upgrade`
 
 ## 仓库结构
 
 ```
-cc-kit/
-├── README.md              # 本文件
-├── CC-Kit-安装手册.md       # 完整安装手册
-├── install.sh             # 一键安装脚本
-├── CLAUDE.md              # L0 全局宪法（复制到 ~/.claude/）
-├── DOC_PROTOCOL.md        # 分形文档协议（复制到 ~/.claude/）
-├── PHILOSOPHY.md          # 设计哲学与品味判断（复制到 ~/.claude/）
-├── settings.json          # 全局设置（复制到 ~/.claude/）
-├── rules/                 # 规则文件（复制到 ~/.claude/rules/）
-│   ├── agents.md          # Agent 编排策略
-│   ├── coding-style.md    # 编码风格规范
-│   ├── git-workflow.md    # Git 工作流
-│   ├── hooks.md           # Hooks 使用规范
-│   ├── performance.md     # 性能 & 模型选择
-│   └── security.md        # 安全检查清单
-└── templates/             # 项目模板（复制到 ~/.claude/templates/）
-    ├── claude.md          # 项目 L1 宪法模板
-    ├── stack.md           # 技术栈模板
-    ├── skills.md          # Skill 路由模板
-    ├── mcp.md             # MCP Profile 模板
-    └── start.md           # 启动路径模板
+cc-geb/
+├── install.sh               # 全局安装 → ~/.claude/
+├── CLAUDE.md                 # 全局配置（~15 行）
+├── rules/                    # 全局规则
+│   ├── coding-style.md       #   不可变性 + 文件组织
+│   ├── git-workflow.md       #   Commit 格式
+│   └── performance.md        #   模型选择
+├── templates/                # 项目模板（/cc-geb init 选用）
+│   ├── light.md              #   轻量级
+│   ├── standard.md           #   标准级（含 GEB 文档同步）
+│   ├── full.md               #   完整级（含 workflow + 设计哲学）
+│   ├── stack.md              #   技术栈
+│   └── workflow-bootstrap.md #   六层 workflow 定义
+├── skills/
+│   └── cc-geb/SKILL.md       # /cc-geb — 唯一 Skill，三个子命令
+└── scripts/
+    ├── doc-lint.sh           # Hook: 代码变更后提醒文档同步
+    └── session-lesson.sh     # Hook: 会话结束提取教训
 ```
-
-## 核心理念
-
-```
-┌─────────────────────────────────────────┐
-│  L0 · ~/.claude/CLAUDE.md               │  全局宪法
-│  ┌──────────────────────────────────┐   │
-│  │  L1 · <项目>/CLAUDE.md           │   │  项目级
-│  │  ┌───────────────────────────┐   │   │
-│  │  │  L2 · 模块/目录级文档      │   │   │  模块级
-│  │  │  ┌────────────────────┐   │   │   │
-│  │  │  │  L3 · 文件/函数注释  │   │   │   │  代码级
-│  │  │  └────────────────────┘   │   │   │
-│  │  └───────────────────────────┘   │   │
-│  └──────────────────────────────────┘   │
-└─────────────────────────────────────────┘
-```
-
-**四条不可违反的法则：**
-
-1. **Map = Terrain** — 代码与文档必须同构
-2. **分形一致性** — L0→L1→L2→L3 变更必须同步
-3. **禁止孤立变更** — 改代码必须改文档
-4. **AI 受宪法约束** — 项目 CLAUDE.md > 全局 CLAUDE.md > 模型默认行为
-
-## 插件依赖
-
-| 插件 | 来源 | 能力 |
-|------|------|------|
-| Superpowers | `obra/superpowers-marketplace` | TDD、调试、计划、代码审查 |
-| Everything Claude Code | `affaan-m/everything-claude-code` | 架构、安全、数据库、前端 |
-| Planning with Files | `OthmanAdi/planning-with-files` | 文件化计划系统 |
-| Claude HUD | `jarrodwatts/claude-hud` | 状态栏显示 |
-| Code Simplifier | `anthropics/claude-plugins-official` | 代码简化 |
-| Ralph Wiggum | `anthropics/claude-code` | 趣味插件 |
 
 ## 许可
 
@@ -97,4 +76,4 @@ MIT
 
 ---
 
-> 架构即认知，文档即记忆。系统是否可靠，取决于它是否记得自己是谁。
+> 架构即认知，文档即记忆。

@@ -1,6 +1,6 @@
 #!/bin/bash
 # ──────────────────────────────────────────────────────────
-# doc-lint.sh — CC-Kit 文档同步检查 hook
+# doc-lint.sh — CC-GEB 文档同步检查 hook
 # ──────────────────────────────────────────────────────────
 # PostToolUse hook: 当 Edit/Write 修改代码文件时，
 # 检查同目录或项目根目录是否有对应文档需要同步更新。
@@ -76,7 +76,7 @@ fi
 # 输出提醒（如果有的话）
 if [[ -n "$DOC_HINTS" ]]; then
   echo ""
-  echo "📋 CC-Kit Doc-Lint 提醒："
+  echo "📋 CC-GEB Doc-Lint 提醒："
   echo -e "$DOC_HINTS"
   echo "法则：禁止孤立变更 — 改代码不改文档 → 架构破坏"
   echo ""
